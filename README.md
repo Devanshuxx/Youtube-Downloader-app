@@ -2,7 +2,7 @@
 
 A beautiful, modern web application built with **Streamlit** and **yt-dlp** for downloading YouTube videos in the best available quality (up to 4K). Features an intuitive user interface with real-time progress tracking and video preview capabilities.
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://your-app-url.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://https://dyoutubedownloader.streamlit.app/)
 
 ## ✨ Features
 
@@ -20,7 +20,7 @@ A beautiful, modern web application built with **Streamlit** and **yt-dlp** for 
 
 ### Online Version (Recommended)
 Access the app instantly without any installation:
-**[🌐 Open YouTube Downloader](https://your-app-url.streamlit.app)**
+**[🌐 Open YouTube Downloader](https://https://dyoutubedownloader.streamlit.app/)**
 
 ### Local Installation
 
@@ -260,7 +260,7 @@ If you found this project useful, please consider giving it a star! ⭐
 ---
 
 ### 🔗 Quick Links
-- [🌐 Live Demo](https://your-app-url.streamlit.app)
+- [🌐 Live Demo](https://https://dyoutubedownloader.streamlit.app/)
 - [📖 Documentation](https://github.com/Devanshuxx/youtube-downloader-app/wiki)
 - [🐛 Report Bug](https://github.com/Devanshuxx/youtube-downloader-app/issues)
 - [💡 Request Feature](https://github.com/Devanshuxx/youtube-downloader-app/issues)
