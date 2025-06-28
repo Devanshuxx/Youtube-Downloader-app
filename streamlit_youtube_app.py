@@ -103,7 +103,6 @@ def get_available_qualities(formats):
             qualities.add(quality)
     
     return sorted(list(qualities), key=lambda x: int(x.split('p')[0]), reverse=True)
-
 def download_video(url, output_path, quality="best", progress_callback=None):
     """Download video with progress tracking"""
     try:
@@ -123,6 +122,7 @@ def download_video(url, output_path, quality="best", progress_callback=None):
             height = quality.split('p')[0]
             format_selector = f'bestvideo[height<={height}][ext=mp4]+bestaudio[ext=m4a]/best[height<={height}][ext=mp4]/best'
         
+        # ✅ Final ydl_opts block with cookiefile support
         ydl_opts = {
             'format': format_selector,
             'outtmpl': os.path.join(output_path, '%(title)s.%(ext)s'),
@@ -130,8 +130,9 @@ def download_video(url, output_path, quality="best", progress_callback=None):
             'writesubtitles': False,
             'writeautomaticsub': False,
             'progress_hooks': [progress_hook],
+            'cookiefile': 'cookies.txt',  # ✅ This makes it work even on mobile browsers!
         }
-        
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
             return True
@@ -139,6 +140,42 @@ def download_video(url, output_path, quality="best", progress_callback=None):
     except Exception as e:
         st.error(f"Download failed: {str(e)}")
         return False
+
+# def download_video(url, output_path, quality="best", progress_callback=None):
+#     """Download video with progress tracking"""
+#     try:
+#         # Create progress hook
+#         def progress_hook(d):
+#             if progress_callback and d['status'] == 'downloading':
+#                 if 'total_bytes' in d:
+#                     progress = d['downloaded_bytes'] / d['total_bytes']
+#                     progress_callback(progress)
+        
+#         # Configure download options based on quality
+#         if quality == "best":
+#             format_selector = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+#         elif quality == "audio":
+#             format_selector = 'bestaudio[ext=m4a]/bestaudio/best'
+#         else:
+#             height = quality.split('p')[0]
+#             format_selector = f'bestvideo[height<={height}][ext=mp4]+bestaudio[ext=m4a]/best[height<={height}][ext=mp4]/best'
+        
+#         ydl_opts = {
+#             'format': format_selector,
+#             'outtmpl': os.path.join(output_path, '%(title)s.%(ext)s'),
+#             'merge_output_format': 'mp4' if quality != "audio" else 'm4a',
+#             'writesubtitles': False,
+#             'writeautomaticsub': False,
+#             'progress_hooks': [progress_hook],
+#         }
+        
+#         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+#             ydl.download([url])
+#             return True
+            
+#     except Exception as e:
+#         st.error(f"Download failed: {str(e)}")
+#         return False
 
 def format_duration(seconds):
     """Format duration in readable format"""
@@ -370,3 +407,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
