@@ -339,7 +339,10 @@ def main():
                     downloaded_files = glob.glob(os.path.join(download_path, "*"))
                     if downloaded_files:
                         latest_file = max(downloaded_files, key=os.path.getctime)
-                        file_name = os.path.basename(latest_file)
+                        # file_name = os.path.basename(latest_file)
+                        ext = "m4a" if "audio" in file_name else "mp4"
+                        file_name = os.path.splitext(os.path.basename(latest_file))[0] + f".{ext}"
+
 
                         with open(latest_file, "rb") as file:
                             btn = st.download_button(
@@ -348,6 +351,8 @@ def main():
                                 file_name=file_name,
                                 mime="video/mp4" if selected_quality != "audio" else "audio/m4a"
                             )
+
+
 
                     
                 else:
@@ -376,7 +381,10 @@ def main():
                     downloaded_files = glob.glob(os.path.join(download_path, "*"))
                     if downloaded_files:
                         latest_file = max(downloaded_files, key=os.path.getctime)
-                        file_name = os.path.basename(latest_file)
+                        # file_name = os.path.basename(latest_file)
+                        ext = "m4a" if "audio" in file_name else "mp4"
+                        file_name = os.path.splitext(os.path.basename(latest_file))[0] + f".{ext}"
+
 
                         with open(latest_file, "rb") as file:
                             btn = st.download_button(
@@ -385,6 +393,7 @@ def main():
                                 file_name=file_name,
                                 mime="video/mp4"
                             )
+
 
                 else:
                     st.error("❌ Download failed. Please try again.")
