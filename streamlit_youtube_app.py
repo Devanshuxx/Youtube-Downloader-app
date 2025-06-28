@@ -335,6 +335,20 @@ def main():
                     
                     # Show download location
                     st.info(f"📁 File saved to: {download_path}")
+                    import glob
+                    downloaded_files = glob.glob(os.path.join(download_path, "*"))
+                    if downloaded_files:
+                        latest_file = max(downloaded_files, key=os.path.getctime)
+                        file_name = os.path.basename(latest_file)
+
+                        with open(latest_file, "rb") as file:
+                            btn = st.download_button(
+                                label="⬇️ Click here to save the video",
+                                data=file,
+                                file_name=file_name,
+                                mime="video/mp4" if selected_quality != "audio" else "audio/m4a"
+                            )
+
                     
                 else:
                     st.error("❌ Download failed. Please try again.")
@@ -358,6 +372,20 @@ def main():
                         st.session_state['download_count'] = 0
                     st.session_state['download_count'] += 1
                     st.info(f"📁 File saved to: {download_path}")
+                    import glob
+                    downloaded_files = glob.glob(os.path.join(download_path, "*"))
+                    if downloaded_files:
+                        latest_file = max(downloaded_files, key=os.path.getctime)
+                        file_name = os.path.basename(latest_file)
+
+                        with open(latest_file, "rb") as file:
+                            btn = st.download_button(
+                                label="⬇️ Click here to save the video",
+                                data=file,
+                                file_name=file_name,
+                                mime="video/mp4"
+                            )
+
                 else:
                     st.error("❌ Download failed. Please try again.")
     
@@ -407,4 +435,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
 
